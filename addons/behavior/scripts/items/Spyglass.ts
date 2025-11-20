@@ -11,7 +11,7 @@ import { ItemBase } from "./ItemBase";
 
 class Spyglass extends ItemBase {
     readonly itemId = "minecraft:spyglass";
-    readonly attackMaxRange = 100;
+    readonly attackMaxRange = 200;
     static instance = new this();
 
     private constructor() {
@@ -28,7 +28,6 @@ class Spyglass extends ItemBase {
     }
 
     applyDamage(player: Player) {
-        const dimension = player.dimension;
         const viewDir = player.getViewDirection();
         const entityHits = player.getEntitiesFromViewDirection({
             maxDistance: this.attackMaxRange,
@@ -57,21 +56,23 @@ class Spyglass extends ItemBase {
 
     spawnTrajectoryParticles(player: Player) {
         const dimension = player.dimension;
+        const attackRange = this.getAttackRange(player);
         const initialLoc = Vec3.add(player.getHeadLocation(), player.getViewDirection());
-        let preLoc = initialLoc;
-        for (let i = 0; i < this.attackMaxRange; i++) {
+        for (let i = 0; i < attackRange; i++) {
             const currentLoc = Vec3.add(initialLoc, Vec3.multiply(player.getViewDirection(), i));
 
             const isValid = dimension.isChunkLoaded(currentLoc);
             if (!isValid) break;
 
-            const hit = dimension.getBlockFromRay(preLoc, Vec3.subtract(currentLoc, preLoc), {
-                maxDistance: 1
-            });
-            if (hit) break;
-
             dimension.spawnParticle("minecraft:endrod", currentLoc);
-            preLoc = currentLoc;
         }
+    }
+
+    getAttackRange(player: Player): number {
+        const result = player.getBlockFromViewDirection({ maxDistance: this.attackMaxRange });
+
+        return result
+            ? Math.floor(Vec3.distance(result.block.location, player.location))
+            : this.attackMaxRange;
     }
 }

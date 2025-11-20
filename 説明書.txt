@@ -1,0 +1,19 @@
+1. 作業は必ずレポジトリのrootディレクトリに存在しているLalunaRPGのワークスペースで行ってください。
+
+2. アドオンの本体はaddonsフォルダ内にあります、なので作業はaddons内のファイルをいじってください
+
+3. bedrock-server内にあるアドオンはすべてコンパイル済みの物です。
+
+4. addonsで編集が行われた場合即座にコンパイルされて適応されるので、bedrock-server内にあるアドオンに加えた編集はなくなります。
+
+5. 作業を開始する前にまだ一度も実行していない場合は最初にsetup.batを起動してください
+
+6. 外部ソフト(blockbenchなど)で編集を加えた場合、自動でサーバー側にコピーされないので、手動でcopy.batを起動してください
+
+7. bdsのアップデートを行いたい場合はversion.jsonを更新したのちにupdateBDS.batを起動してください
+
+以下詳細
+
+レポジトリのrootディレクトリにあるversion.jsonではBDSのバージョンを指定しています。
+BDSは次のURLから取得しています。尚、$versionにはversion.jsonで指定したBDSのバージョンが入っています。
+"https://www.minecraft.net/bedrockdedicatedserver/bin-win/bedrock-server-$version.zip"

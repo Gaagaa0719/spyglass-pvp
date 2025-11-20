@@ -1,0 +1,113 @@
+{
+  "namespace": "hud",
+
+  // 邪魔な背景削除
+  "hud_title_text": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "offset": [0, -19],
+    "layer": 1,
+    "alpha": "@hud.anim_title_text_alpha_in",
+    "propagate_alpha": true,
+    "controls": [
+      {
+        "title_frame": {
+          "type": "panel",
+          "size": ["100%", "100%cm"],
+          "controls": [
+            {
+              "title": {
+                "type": "label",
+                "anchor_from": "top_middle",
+                "anchor_to": "top_middle",
+                "color": "$title_command_text_color",
+                "enable_profanity_filter": true,
+                "text": "#text",
+                "layer": 31,
+                "localize": false,
+                "font_size": "extra_large",
+                "variables": [
+                  {
+                    "requires": "(not $title_shadow)",
+                    "$show_shadow": false
+                  },
+                  {
+                    "requires": "$title_shadow",
+                    "$show_shadow": true
+                  }
+                ],
+                "shadow": "$show_shadow",
+                "text_alignment": "center",
+                "offset": [0, 6],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#text",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#text = 'triple_seven') or (#text = 'triple_dandelion') or (#text = 'triple_apple') or (#text = 'triple_diamond') or (#text = 'triple_iron') or (#text = 'triple_carrot')))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "subtitle_frame": {
+          "type": "panel",
+          "size": ["100%", "100%cm"],
+          "controls": [
+            {
+              "subtitle": {
+                "type": "label",
+                "anchor_from": "top_middle",
+                "anchor_to": "top_middle",
+                "color": "$title_command_text_color",
+                "enable_profanity_filter": true,
+                "text": "#text",
+                "layer": 31,
+                "localize": false,
+                "font_size": "large",
+                "variables": [
+                  {
+                    "requires": "$subtitle_initially_visible",
+                    "$anim_type": 1.0
+                  },
+                  {
+                    "requires": "(not $subtitle_initially_visible)",
+                    "$anim_type": "@hud.anim_subtitle_text_alpha_in"
+                  },
+                  {
+                    "requires": "(not $title_shadow)",
+                    "$show_shadow": false
+                  },
+                  {
+                    "requires": "$title_shadow",
+                    "$show_shadow": true
+                  }
+                ],
+                "shadow": "$show_shadow",
+                "alpha": "$anim_type",
+                "text_alignment": "center",
+                "offset": [1, 19],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#text",
+                    "binding_type": "global"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "$schema": "https://kalmemarq.github.io/Bugrock-JSON-UI-Schemas/ui.schema.json"
+}

@@ -1,0 +1,19 @@
+/node_modules
+package-lock.json
+Dedicated_Server.txt
+package-lock.json
+
+# bedrock-server/ 全体を無視
+/bedrock-server/*
+
+# ただし、bedrock-server/ ディレクトリ自体は追跡
+!/bedrock-server/
+
+# 特定のファイルとフォルダを追跡
+!/bedrock-server/server.properties
+!/bedrock-server/worlds/
+!/bedrock-server/worlds/Bedrock_level/
+/bedrock-server/worlds/Bedrock_level/*
+!/bedrock-server/worlds/Bedrock_level/world_resource_packs.json
+!/bedrock-server/worlds/Bedrock_level/world_behavior_packs.json
+!/bedrock-server/config/

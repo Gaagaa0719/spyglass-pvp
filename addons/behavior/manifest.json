@@ -1,0 +1,36 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "RPG",
+    "description": "",
+    "uuid": "9aa0ea1b-d8e2-42db-97ab-43d46987b07c",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 20]
+  },
+  "modules": [
+    {
+      "description": "",
+      "type": "data",
+      "uuid": "fe54f622-fd2b-4a48-bddb-10c84e22bc85",
+      "version": [1, 0, 0]
+    },
+    {
+      "description": "GameTest module",
+      "type": "script",
+      "uuid": "5445c967-3055-4a4e-8b58-cb8dbb749da5",
+      "version": [1, 0, 0],
+      "language": "javascript",
+      "entry": "scripts/index.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.3.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    }
+  ]
+}

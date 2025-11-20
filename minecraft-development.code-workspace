@@ -1,0 +1,166 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "terminal.integrated.env.windows": {
+      "CHCP": "65001"
+    },
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "editor.formatOnSave": true,
+    "biome.rename": true,
+    "[javascript]": {
+      "editor.tabSize": 4,
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports.biome": "explicit"
+      }
+    },
+    "[typescript]": {
+      "editor.tabSize": 4,
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports.biome": "explicit"
+      }
+    },
+    "[jsonc]": {
+      "editor.tabSize": 2,
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[json]": {
+      "editor.tabSize": 2,
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "files.associations": {
+      "*.json": "jsonc",
+      "*.material": "jsonc"
+    },
+    "filewatcher.commands": [
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_rp.bat",
+        "match": "^.*resource\\.*",
+        "event": "onFileChange"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_rp.bat",
+        "match": "^.*resource\\.*",
+        "event": "onFileCreate"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_rp.bat",
+        "match": "^.*resource\\.*",
+        "event": "onFileDelete"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_rp.bat",
+        "match": "^.*resource\\.*",
+        "event": "onFileRename"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_bp.bat",
+        "match": "^.*behavior\\.*",
+        "event": "onFileChange"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_bp.bat",
+        "match": "^.*behavior\\.*",
+        "event": "onFileCreate"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_bp.bat",
+        "match": "^.*behavior\\.*",
+        "event": "onFileDelete"
+      },
+      {
+        "cmd": "cd /d ${workspaceRoot} && .\\scripts\\copy_bp.bat",
+        "match": "^.*behavior\\.*",
+        "event": "onFileRename"
+      }
+    ],
+    "cSpell.words": [
+      "actionbar",
+      "cancelation",
+      "esbenp",
+      "filewatcher",
+      "laluna",
+      "overworld",
+      "OVERWORLD",
+      "playanimation",
+      "playsound",
+      "rawtext",
+      "Stackable",
+      "titleraw",
+      "XUID"
+    ],
+    "VsCodeTaskButtons.tasks": [
+      {
+        "label": "$(run) Start BDS",
+        "task": "RunBDS",
+        "tooltip": "デバッグ用のBDSを開始します。"
+      },
+
+      {
+        "label": "$(run) Copy",
+        "task": "CopyAddons",
+        "tooltip": "アドオンをサーバーにコピーします。"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "RunBDS",
+        "command": "./bedrock_server.exe",
+        "type": "shell",
+        "runOptions": {
+          "instanceLimit": 1
+        },
+        "detail": "デバッグ用のBDSを開始します。",
+        "isBackground": true,
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "problemMatcher": {
+          "fileLocation": ["relative", "${workspaceFolder}/bedrock-server/development_behavior_packs/bp/scripts"],
+          "pattern": {
+            "kind": "location",
+            "regexp": "^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}:\\d{3} ERROR\\] \\[Scripting\\] Plugin \\[.*\\] - \\[.*\\] ran with error: \\[(.*) {4}at.*\\((.*):(.*)\\)",
+            "message": 1,
+            "file": 2,
+            "line": 3
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Starting Server",
+            "endsPattern": "Stopping server"
+          }
+        },
+        "options": {
+          "cwd": "${workspaceFolder}/bedrock-server"
+        }
+      },
+      {
+        "label": "CopyAddons",
+        "command": "chcp 65001; ./scripts/copy_rp.bat; ./scripts/copy_bp.bat",
+        "type": "shell",
+        "runOptions": {
+          "instanceLimit": 1
+        },
+        "detail": "ビヘイビアとリソースパックをコピーします。",
+        "isBackground": true,
+        "options": {
+          "cwd": "${workspaceFolder}/"
+        }
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": ["biomejs.biome", "microsoft.eslint", "spencerwmiles.vscode-task-buttons"]
+  }
+}
